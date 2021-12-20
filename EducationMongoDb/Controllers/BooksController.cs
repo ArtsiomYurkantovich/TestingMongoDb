@@ -15,14 +15,14 @@ namespace EducationMongoDb.Controllers
         {
             _bookRepository = bookRepository;
         }
-      
+
         [HttpGet]
         public IActionResult GetBooks()
         {
             return View(_bookRepository.GetBooks());
         }
 
-        
+
         public IActionResult Create()
         {
             return View(new Book());
@@ -31,7 +31,7 @@ namespace EducationMongoDb.Controllers
         public IActionResult Create(Book book)
         {
             _bookRepository.AddBook(book);
-            return View(book);
+            return RedirectToAction("GetBooks");
         }
 
         [HttpGet]
@@ -39,20 +39,21 @@ namespace EducationMongoDb.Controllers
         {
             return View(_bookRepository.GetBook(id));
         }
-        
+
         [HttpPost]
         public IActionResult Update(Book book)
         {
-            return View(_bookRepository.UpdateBook(book));
+            _bookRepository.UpdateBook(book);
+            return RedirectToAction("GetBooks");
         }
 
         public IActionResult DeleteBook(string id)
         {
-           var book = _bookRepository.GetBook(id);
+            var book = _bookRepository.GetBook(id);
             return View(book);
         }
 
-        [HttpPost,ActionName("DeleteBook")]
+        [HttpPost, ActionName("DeleteBook")]
         public IActionResult Delete(string id)
         {
             _bookRepository.RemoveBook(id);

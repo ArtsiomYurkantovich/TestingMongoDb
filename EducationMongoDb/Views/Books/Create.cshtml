@@ -25,7 +25,16 @@
             </div>
             <div class="form-group">
                 <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" />
+                @Html.DropDownList("Category", new List<SelectListItem>
+           {
+               new SelectListItem { Text = "Action and Adventure", Value = "Action and Adventure" },
+               new SelectListItem { Text = "Classics", Value = "Classics" },
+               new SelectListItem { Text = "Comic Book or Graphic Novel", Value = "Comic Book or Graphic Novel" },
+               new SelectListItem { Text = "Detective and Mystery", Value = "Detective and Mystery" },
+               new SelectListItem { Text = "Fantasy", Value = "Fantasy" },
+               new SelectListItem { Text = "Historical Fiction", Value = "Historical Fiction" },
+               new SelectListItem { Text = "Horror", Value = "Horror" },
+           }, "Select book genres", new { @class = "form-control" })
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <div class="form-group">
